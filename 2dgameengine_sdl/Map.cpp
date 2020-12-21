@@ -10,6 +10,14 @@
 
 extern EntityManager manager;
 
+//std::pair<int, int> Map::convert_value_into_source(int value) {
+//	
+//	int sourceRectX = value - 1;
+//	int sourceRectY = sourceRectX / tileSize;
+//
+//	return std::pair<int, int>(1, 1);
+//}
+
 void Map::LoadMap(std::string filePath, int mapSizeX, int mapSizeY) {
 	// Sets the Game's mapsize
 
@@ -35,24 +43,25 @@ void Map::LoadMap(std::string filePath, int mapSizeX, int mapSizeY) {
 	mapFile.close();
 }
 
-void Map::LoadMap(sol::table* fileData, int width, int height)
+void Map::LoadMap(sol::table* fileData, int width, int height, int imgwidth , int imgheight)
 {
 	//  Loading everything into this table
-	int width_index = 0;
-	int height_index = 0;
+	int width_index = 0 , height_index = 0, sourceRectY, sourceRectX;
 
 	fileData->for_each([&](sol::object const& key, sol::object const& value) {
-		int a = 0, b = 0;
 		int current_key = key.as<int>(), current_value = value.as<int>();
+		//int current_key = key.as<int>(), current_value = value.as<int>();
 		// If our iterator's key is reached width that means we have to start addressing another row
 		// So if we subtract the current row index+1 times the width and we get 1 that means we have completed a row so we have to address a new one  // 11-((0+1)*10) - 21-((1+1))*10)
-		if (current_key - (height_index+1)*width == 1) {
+		if (current_key - (height_index + 1) * width == 1) {
 			height_index++;
 		}
 
 		// These two digits will says the starting pixel of our texture at its picture array so we have to split the input into two digits
-		int sourceRectY = current_value / 10;
-		int sourceRectX = current_value % 10;
+		// But our digits holds which index holds the image piece what we need if it was in order 
+		sourceRectY = ((current_value - 1) / width) * tileSize;
+		sourceRectX = ((current_value - 1)  % width) * tileSize;
+
 
 		// our current col index will be the iterator-1 minus the row counter times 10
 		width_index = (current_key - 1)-(height_index * 10);

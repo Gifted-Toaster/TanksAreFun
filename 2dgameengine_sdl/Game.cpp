@@ -372,7 +372,9 @@ void Game::LoadLevelMap(Levels levelNumber)
     map->LoadMap(
         &mapFile, 
         static_cast<int>(levelMap["width"]), // width+height
-        static_cast<int>(levelMap["height"])
+        static_cast<int>(levelMap["height"]),
+        static_cast<int>(tilesetdata[0]["imagewidth"]),
+        static_cast<int>(tilesetdata[0]["imageheight"])
     );
 }
 
