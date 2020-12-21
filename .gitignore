@@ -1,0 +1,7 @@
+lib/
+.vs/
+assets/fonts/
+assets/images/
+Debug/
+*.tmx
+*.tsx

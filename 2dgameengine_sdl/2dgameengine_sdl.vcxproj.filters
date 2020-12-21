@@ -1,0 +1,205 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Managers">
+      <UniqueIdentifier>{74eb8fe2-f5a2-4c25-a3be-5172397051bd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Entity">
+      <UniqueIdentifier>{140db9c3-d73e-4c8b-9a03-0ca68a7b5d4b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Asset">
+      <UniqueIdentifier>{e10d089b-58e9-4d1f-979d-14c5fabadf6f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Texture">
+      <UniqueIdentifier>{1b38a270-4d18-440e-a003-fe02ddee5a71}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Font">
+      <UniqueIdentifier>{aa30a1e9-6fc5-4999-996c-be36b49c3fa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Entity\Buttons">
+      <UniqueIdentifier>{1f28a98e-15c4-4ff3-b1ac-0ce606b560cf}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base">
+      <UniqueIdentifier>{cf293583-d8cb-43fd-8b27-e6afd69405a0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\Collision">
+      <UniqueIdentifier>{ff05dd72-dd03-4e8c-9c02-e4126c3225e6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\BaseObject">
+      <UniqueIdentifier>{0b8c6598-5184-44e7-a2f1-b9f5e41d0fc6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\BaseObject\Entity">
+      <UniqueIdentifier>{896187e7-9427-47e3-bd21-50dec048760d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\BaseObject\Entity\Preset">
+      <UniqueIdentifier>{c45dffa3-509c-42e2-b724-fe3ed736c0cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\BaseObject\Map">
+      <UniqueIdentifier>{e8b679c7-b364-4924-a18b-030be6749481}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\ComponentTypes">
+      <UniqueIdentifier>{9682ee30-4583-44eb-b513-a7753d4dffa3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\Log">
+      <UniqueIdentifier>{7349bc3b-4626-4943-ab26-803811694465}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Base\Constans">
+      <UniqueIdentifier>{f0bcbc8d-14ab-4403-b74c-3275e1832e0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Entity\Presets">
+      <UniqueIdentifier>{af139dc1-b4bb-45a6-be7c-a91bd555704b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Managers\Entity\Collision">
+      <UniqueIdentifier>{00cfb35f-2dc9-4734-bf60-769d91bfe2ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Level1">
+      <UniqueIdentifier>{2a7fd225-89e2-43a8-9711-fba14e12f729}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="EntityManager.cpp">
+      <Filter>Managers\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="AssetManager.cpp">
+      <Filter>Managers\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="TextureManager.cpp">
+      <Filter>Managers\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Base\BaseObject\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Map.cpp">
+      <Filter>Base\BaseObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="FontManager.cpp">
+      <Filter>Managers\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="Collision.cpp">
+      <Filter>Base\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="LogWindow.cpp">
+      <Filter>Base\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="ButtonManager.cpp">
+      <Filter>Managers\Entity\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="PresetManager.cpp">
+      <Filter>Managers\Entity\Presets</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>Base</Filter>
+    </ClCompile>
+    <ClCompile Include="CollisionManager.cpp">
+      <Filter>Managers\Entity\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="Source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="EntityManager.h">
+      <Filter>Managers\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="AssetManager.h">
+      <Filter>Managers\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="TextureManager.h">
+      <Filter>Managers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Base\BaseObject\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Map.h">
+      <Filter>Base\BaseObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="FontManager.h">
+      <Filter>Managers\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="Collision.h">
+      <Filter>Base\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="Animation.h">
+      <Filter>Managers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="TransformComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Component.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="HealthComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="KeyboardControlComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="ProjectileEmitterComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="SpriteComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="TextLabelComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="TileComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="Preset.h">
+      <Filter>Base\BaseObject\Entity\Preset</Filter>
+    </ClInclude>
+    <ClInclude Include="LogData.h">
+      <Filter>Base\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="LogWindow.h">
+      <Filter>Base\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="ButtonManager.h">
+      <Filter>Managers\Entity\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="PresetManager.h">
+      <Filter>Managers\Entity\Presets</Filter>
+    </ClInclude>
+    <ClInclude Include="Constans.h">
+      <Filter>Base\Constans</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>Base</Filter>
+    </ClInclude>
+    <ClInclude Include="CollisionManager.h">
+      <Filter>Managers\Entity\Collision</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="readme.txt">
+      <Filter>Source Files</Filter>
+    </Text>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="..\assets\scripts\Level0.lua">
+      <Filter>Source Files</Filter>
+    </None>
+    <None Include="..\assets\scripts\EntityPresets.lua">
+      <Filter>Source Files\Level1</Filter>
+    </None>
+    <None Include="..\assets\tilemaps\jungle.map">
+      <Filter>Source Files\Level1</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\assets\tilemaps\jungle.png">
+      <Filter>Source Files\Level1</Filter>
+    </Image>
+  </ItemGroup>
+</Project>
