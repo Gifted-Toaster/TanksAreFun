@@ -3,11 +3,11 @@
 
 
 
-# Progress:
+## Progress:
 - Reading from Tiled editor exports (2020.12.21)
 
 
-# TODO:
+## TODO:
 - Mouse
 - Unit controll with mouse
 - Enemy reactions ( Basic AI )
