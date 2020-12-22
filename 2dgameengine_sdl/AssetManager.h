@@ -16,6 +16,7 @@ private:
 	EntityManager* manager;
 public:
 	AssetManager(EntityManager* manager);
+	bool HasNoAssets();
 	~AssetManager();
 	void ClearData();
 

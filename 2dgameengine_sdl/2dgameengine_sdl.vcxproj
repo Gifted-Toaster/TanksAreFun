@@ -159,6 +159,7 @@
     <ClCompile Include="EntityManager.cpp" />
     <ClCompile Include="FontManager.cpp" />
     <ClCompile Include="Game.cpp" />
+    <ClCompile Include="LevelSetup.cpp" />
     <ClCompile Include="LogWindow.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="PresetManager.cpp" />
@@ -180,6 +181,7 @@
     <ClInclude Include="ColliderComponent.h" />
     <ClInclude Include="ButtonComponent.h" />
     <ClInclude Include="HealthComponent.h" />
+    <ClInclude Include="LevelSetup.h" />
     <ClInclude Include="LogData.h" />
     <ClInclude Include="LogWindow.h" />
     <ClInclude Include="Preset.h" />

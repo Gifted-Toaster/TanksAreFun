@@ -10,6 +10,7 @@
 #include "./EntityManager.h"
 #include "./LogWindow.h"
 #include "./LogData.h"
+#include "./LevelSetup.h"
 
 class AssetManager;
 class LogWindow;
@@ -52,7 +53,6 @@ public:
     int ticksLastFrame = 0;
 
     bool IsRunning() const;
-    
 
     // SETUP EVENTS
     void Initialize(int width, int height, bool devConsole);
@@ -60,8 +60,6 @@ public:
     void LoadLogWindow(bool devConsole);
     void LoadCursor();
 
-    static void LoadLevel(Levels levelNumber);
-    static void LoadPresets();
 
     // UPDATE EVENTS
     void ProcessInput();
@@ -81,12 +79,6 @@ public:
     static void DamagePlayer(Entity* thatEntity);
     static void ProcessNextLevel();
     static void ProcessGameOver();
-
-
-    // LOAD LEVEL
-    static void LoadLevelAssets(sol::table levelAssets);
-    static void LoadLevelMap(Levels levelNumber);
-    static void LoadLevelEntities(sol::table levelEntities);
     
 };
 

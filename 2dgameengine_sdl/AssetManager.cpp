@@ -3,6 +3,11 @@
 
 AssetManager::AssetManager(EntityManager* manager) : manager(manager) {}
 
+bool AssetManager::HasNoAssets()
+{
+	return textures.empty() && fonts.empty();
+}
+
 void AssetManager::ClearData() {
 	textures.clear();
 	fonts.clear();
