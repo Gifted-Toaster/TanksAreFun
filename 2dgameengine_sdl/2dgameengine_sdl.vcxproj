@@ -198,14 +198,6 @@
   <ItemGroup>
     <Text Include="readme.txt" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="..\assets\scripts\EntityPresets.lua" />
-    <None Include="..\assets\scripts\Level0.lua" />
-    <None Include="..\assets\tilemaps\jungle.map" />
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\assets\tilemaps\jungle.png" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

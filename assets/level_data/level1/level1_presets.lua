@@ -1,4 +1,4 @@
-EntityPreset = {
+Level1Presets = {
     ----------------------------------------------------
     -- table to pre define entities and their components for dinamic creation
     ----------------------------------------------------

@@ -44,9 +44,6 @@
     <Filter Include="Base\ComponentTypes">
       <UniqueIdentifier>{9682ee30-4583-44eb-b513-a7753d4dffa3}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Base\Log">
-      <UniqueIdentifier>{7349bc3b-4626-4943-ab26-803811694465}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Base\Constans">
       <UniqueIdentifier>{f0bcbc8d-14ab-4403-b74c-3275e1832e0c}</UniqueIdentifier>
     </Filter>
@@ -56,11 +53,14 @@
     <Filter Include="Managers\Entity\Collision">
       <UniqueIdentifier>{00cfb35f-2dc9-4734-bf60-769d91bfe2ca}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Source Files\Level1">
-      <UniqueIdentifier>{2a7fd225-89e2-43a8-9711-fba14e12f729}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Base\ComponentTypes\Base">
       <UniqueIdentifier>{b0cd35e0-abbd-4c67-a933-d2e0ff95a8ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{14b41954-7839-4c6b-84fc-23ecfd69d682}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Log">
+      <UniqueIdentifier>{7349bc3b-4626-4943-ab26-803811694465}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -86,16 +86,13 @@
       <Filter>Base\Collision</Filter>
     </ClCompile>
     <ClCompile Include="LogWindow.cpp">
-      <Filter>Base\Log</Filter>
+      <Filter>GameObject\Log</Filter>
     </ClCompile>
     <ClCompile Include="ButtonManager.cpp">
       <Filter>Managers\Entity\Buttons</Filter>
     </ClCompile>
     <ClCompile Include="PresetManager.cpp">
       <Filter>Managers\Entity\Presets</Filter>
-    </ClCompile>
-    <ClCompile Include="Game.cpp">
-      <Filter>Base</Filter>
     </ClCompile>
     <ClCompile Include="CollisionManager.cpp">
       <Filter>Managers\Entity\Collision</Filter>
@@ -104,7 +101,10 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="LevelSetup.cpp">
-      <Filter>Source Files</Filter>
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Game.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -160,10 +160,10 @@
       <Filter>Base\BaseObject\Entity\Preset</Filter>
     </ClInclude>
     <ClInclude Include="LogData.h">
-      <Filter>Base\Log</Filter>
+      <Filter>GameObject\Log</Filter>
     </ClInclude>
     <ClInclude Include="LogWindow.h">
-      <Filter>Base\Log</Filter>
+      <Filter>GameObject\Log</Filter>
     </ClInclude>
     <ClInclude Include="ButtonComponent.h">
       <Filter>Base\ComponentTypes</Filter>
@@ -177,36 +177,22 @@
     <ClInclude Include="Constans.h">
       <Filter>Base\Constans</Filter>
     </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>Base</Filter>
-    </ClInclude>
     <ClInclude Include="CollisionManager.h">
       <Filter>Managers\Entity\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="LevelSetup.h" />
     <ClInclude Include="Component.h">
       <Filter>Base\ComponentTypes\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="LevelSetup.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Game.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt">
       <Filter>Source Files</Filter>
     </Text>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="..\assets\scripts\Level0.lua">
-      <Filter>Source Files</Filter>
-    </None>
-    <None Include="..\assets\scripts\EntityPresets.lua">
-      <Filter>Source Files\Level1</Filter>
-    </None>
-    <None Include="..\assets\tilemaps\jungle.map">
-      <Filter>Source Files\Level1</Filter>
-    </None>
-  </ItemGroup>
-  <ItemGroup>
-    <Image Include="..\assets\tilemaps\jungle.png">
-      <Filter>Source Files\Level1</Filter>
-    </Image>
   </ItemGroup>
 </Project>

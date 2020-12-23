@@ -1,4 +1,4 @@
-Level0 = {
+level0 = {
     ----------------------------------------------------
     -- table to pre define entities and their components for dinamic creation
     ----------------------------------------------------
@@ -6,13 +6,13 @@ Level0 = {
     assets = { -- asset font types and images for example
         [0] = { type="font", id = "charriot-font", file = "../assets/fonts/charriot.ttf", fontSize = 14 },
         [1] = { type="font", id = "charriot-font-big", file = "../assets/fonts/charriot.ttf", fontSize = 26 },
-        [2] = { type="texture", id = "kyra", file = "../assets/images/kyr.png" },
-        [3] = { type="texture", id = "bg-image", file = "../assets/tilemaps/main_menu.png" }
+        [2] = { type="texture", id = "kyra", file = "../assets/level_data/menu/kyr.png" },
+        [3] = { type="texture", id = "bg-image", file = "../assets/level_data/menu/main_menu.png" }
     },
 
     map = {
         textureAssetId = "bg-image",
-        file = "../assets/tilemaps/main_menu.map",
+        file = "../assets/level_data/menu/main_menu.map",
         scale = 1, -- scale of the tiles
         tileSize = 32, -- size of the side of the rectangles which will be rendered on screen
         mapSizeX = 1, -- map file collumns

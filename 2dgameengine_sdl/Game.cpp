@@ -100,9 +100,7 @@ void Game::Initialize(int width, int height , bool devConsole) {
 
     LoadCursor();
 
-    LevelSetup::LoadLevel(MAIN_MENU, &manager, assetManager, map, mainPlayer);
-    //TODO : preset manager csak a szinthez tartozo preseteket toltse be
-    LevelSetup::LoadPresets(MAIN_MENU, &manager);
+    LevelSetup::LoadLevel(MAIN_MENU, &manager, assetManager, map, mainPlayer);  
 
     isRunning = true;
     return;
@@ -164,11 +162,16 @@ void Game::Update() {
 }
 
 void Game::PassLogData(float deltaTime) {
-
+    int x, y;
+    SDL_GetMouseState(&x, &y);
+    //x += camera.x;
+    //y += camera.y;
     logWindow->UpdateLog("FPS" , "FPS: " , deltaTime*1000);
     logWindow->UpdateLog("log_1" , "Active entities: ", manager.GetEntityCount());
     logWindow->UpdateLog("log_2", "Inactive entities: ", manager.GetInactiveCount());
     logWindow->UpdateLog("log_3", "Collidable entities: ", manager.GetColliderSize());
+    logWindow->UpdateLog("log_4", "MousePosX: ", x);
+    logWindow->UpdateLog("log_5", "MousePosY: ", y);
     //logWindow->UpdateLog("log_3", "Active enemies entities: ", manager.GetEntititesByLayer(ENEMY_LAYER).size());
 }
 
@@ -248,8 +251,9 @@ void Game::Collision()
 
 // Loading next level
 void Game::ProcessNextLevel() {
-    LevelSetup::LoadLevel(static_cast<Levels>(static_cast<int>(currentLevel) + 1), &manager, assetManager, map, mainPlayer);
-    LevelSetup::LoadPresets(MAIN_MENU , &manager);
+    currentLevel = static_cast<Levels>(static_cast<int>(currentLevel) + 1);
+    LevelSetup::LoadLevel(currentLevel, &manager, assetManager, map, mainPlayer);
+    LevelSetup::LoadPresets(currentLevel, &manager);
 }
 
 // Ending the game

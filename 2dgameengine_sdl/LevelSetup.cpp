@@ -89,7 +89,7 @@ void LoadLevelMap(Levels levelNumber, Map* map)
 
     sol::state lua;
     lua.open_libraries(sol::lib::base, sol::lib::os, sol::lib::math);;
-    lua.script_file("../assets/tilemaps/" + level + "/" + level + ".lua");
+    lua.script_file("../assets/level_data/" + level + "/map/" + level + "_map.lua");
 
     reconstruct_lua_file(level); // Since the tiled editor places the whole data in a return block which sol cannot accept i had to manualy replace the first line
 
@@ -302,8 +302,14 @@ void LevelSetup::LoadLevel(Levels levelNumber, EntityManager* entityManager, Ass
 
     lua.open_libraries(sol::lib::base, sol::lib::os, sol::lib::math);;
 
-    std::string levelName = "Level" + std::to_string(levelNumber);
-    lua.script_file("../assets/scripts/" + levelName + ".lua");
+    std::string levelName = "level" + std::to_string(levelNumber);
+    if (levelNumber == MAIN_MENU) {
+        lua.script_file("../assets/level_data/menu/" + levelName + "_data.lua");
+    }
+    else {
+        lua.script_file("../assets/level_data/" + levelName + "/" + levelName + "_data.lua");
+    }
+
 
     // We will load and get the data from this table
     sol::table levelData = lua[levelName];
@@ -329,11 +335,13 @@ void LevelSetup::LoadPresets(Levels levelNumber, EntityManager* manager) {
 
     sol::state lua;
     lua.open_libraries(sol::lib::base, sol::lib::os, sol::lib::math);
-    lua.script_file("../assets/scripts/EntityPresets.lua");
+    std::string levelName = "level" + std::to_string(levelNumber);
+    lua.script_file("../assets/level_data/" + levelName + "/" + levelName + "_presets.lua");
+    
 
 
     //  Loading everything into this table
-    sol::table presetData = lua["EntityPreset"];
+    sol::table presetData = lua["Level1Presets"];
     // a) Passing its assets data to this variable
     sol::table presetEntities = presetData["entities"];
 
