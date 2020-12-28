@@ -5,10 +5,11 @@
 
 ## Progress:
 - Reading from Tiled editor exports (2020.12.21)
+- Terrain Collision base (2020.12.28)
 
 
 ## TODO:
 - Mouse
 - Unit controll with mouse
 - Enemy reactions ( Basic AI )
-- Terrain Collision
+- Constructor param data types
