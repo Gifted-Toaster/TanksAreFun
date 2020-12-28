@@ -100,7 +100,7 @@ void Game::Initialize(int width, int height , bool devConsole) {
 
     LoadCursor();
 
-    LevelSetup::LoadLevel(MAIN_MENU, &manager, assetManager, map, mainPlayer);  
+    LevelSetup::LoadLevel(MAIN_MENU, &manager, assetManager, map, &mainPlayer);  
 
     isRunning = true;
     return;
@@ -172,7 +172,6 @@ void Game::PassLogData(float deltaTime) {
     logWindow->UpdateLog("log_3", "Collidable entities: ", manager.GetColliderSize());
     logWindow->UpdateLog("log_4", "MousePosX: ", x);
     logWindow->UpdateLog("log_5", "MousePosY: ", y);
-    //logWindow->UpdateLog("log_3", "Active enemies entities: ", manager.GetEntititesByLayer(ENEMY_LAYER).size());
 }
 
 void Game::Select()
@@ -229,6 +228,7 @@ void Game::Render() {
 // METHODS USED IN OUR UPDATE METHOD
 // Handle camera movement
 void Game::HandleCameraMovement() {
+
     if (mainPlayer) {
         // In this case following the main player
         TransformComponent* mainPlayerTransform = mainPlayer->GetComponent<TransformComponent>();
@@ -252,7 +252,8 @@ void Game::Collision()
 // Loading next level
 void Game::ProcessNextLevel() {
     currentLevel = static_cast<Levels>(static_cast<int>(currentLevel) + 1);
-    LevelSetup::LoadLevel(currentLevel, &manager, assetManager, map, mainPlayer);
+    LevelSetup::LoadLevel(currentLevel, &manager, assetManager, map, &mainPlayer);
+    std::cout << mainPlayer;
     LevelSetup::LoadPresets(currentLevel, &manager);
 }
 

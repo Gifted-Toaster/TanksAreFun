@@ -2,8 +2,10 @@
 #define MAP_H
 
 #include <string>
+#include "./ColliderComponent.h"
 
 extern EntityManager manager;
+//extern ColliderComponent coll;
 
 class Map {
 private:
@@ -21,9 +23,10 @@ public:
 	
 	// Load the whole map by reading the source txt file
 	void LoadMap(std::string filePath, int mapSizeX, int mapSizeY);
-	void LoadMap(sol::table* filePath, int mapSizeX, int mapSizeY, int imgwidth, int imgheight);
+	void LoadMap(sol::table* filePath, int mapSizeX, int mapSizeY, std::map<int, TileColliderInit>* colliderHolder);
 	// Add a tile to the map
 	void AddTile(int sourceX, int sourceY, int x, int y);
+	void AddTileWithCollider(int sourceX, int sourceY, int x, int y, TileColliderInit init);
 };
 
 #endif

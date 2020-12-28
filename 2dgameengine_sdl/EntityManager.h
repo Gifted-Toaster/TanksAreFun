@@ -43,6 +43,7 @@ public:
 	std::vector<Entity*> GetEntititesByLayer(LayerType layer) const;
 	Entity* GetEntityByName(std::string entityName) const;
 	unsigned int GetEntityCount() const;
+	Entity* GetPlayer() const;
 	void ListAllEntites() const;
 
 	// Setters

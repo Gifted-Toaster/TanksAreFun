@@ -104,6 +104,15 @@ unsigned int EntityManager::GetEntityCount() const {
 	return size;
 }
 
+Entity* EntityManager::GetPlayer() const {
+	for (auto* entity : entities[PLAYER_LAYER]) {
+		if (entity->name.compare("player") == 0) {
+			return entity;
+		}
+	}
+	return NULL;
+}
+
 
 Entity* EntityManager::GetEntityByName(std::string entityName) const {
 

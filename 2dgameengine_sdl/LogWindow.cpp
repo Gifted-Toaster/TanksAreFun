@@ -30,9 +30,9 @@ int LogWindow::numberOfActiveLogs() const
     return dat.size();
 }
 
-void LogWindow::RenderText(int position, std::string current) {
+void LogWindow::RenderText(int position, std::string current) 
+{
     SDL_Surface* surfaceText = TTF_RenderText_Solid(Sans, current.c_str(), WHITE_COLOR); // as TTF_RenderText_Solid could only be used on SDL_Surface then you have to create the surface first
-
     SDL_Texture* Message = SDL_CreateTextureFromSurface(renderer, surfaceText); //now you can convert it into a texture
 
     SDL_Rect Message_rect; //create a rect
@@ -49,8 +49,8 @@ void LogWindow::RenderText(int position, std::string current) {
     SDL_DestroyTexture(Message);
 }
 
-void LogWindow::RenderValue(int position , int current) {
-
+void LogWindow::RenderValue(int position , int current) 
+{
     SDL_Surface* surfaceValue = TTF_RenderText_Solid(Sans, std::to_string(current).c_str(), WHITE_COLOR);
     SDL_Texture* Message = SDL_CreateTextureFromSurface(this->renderer, surfaceValue);
 

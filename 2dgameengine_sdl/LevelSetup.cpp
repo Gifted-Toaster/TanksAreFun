@@ -6,6 +6,7 @@
 #include "./Preset.h"
 
 #include <fstream>
+#include <map>
 #include <string>
 
 #include "./Component.h"
@@ -17,6 +18,8 @@
 #include "./ProjectileEmitterComponent.h"
 #include "./HealthComponent.h"
 #include "./ButtonComponent.h"
+
+#include <cmath>
 
 void LoadLevelAssets(sol::table levelAssets, AssetManager* assetManager)
 {
@@ -45,67 +48,93 @@ void LoadLevelAssets(sol::table levelAssets, AssetManager* assetManager)
     }
 }
 
-void swap_first_line(std::string level) {
-    std::fstream file("../assets/tilemaps/" + level + "/" + level + ".lua");
-    file << level + " = {\n";
-    file.close();
-}
+//void swap_first_line(std::string level) {
+//    std::fstream file("../assets/level_data/" + level + "/map/" + level + "_map.lua");
+//    file << level + " = {\n";
+//    file.close();
+//}
+//
+//void swap_subtables(std::string level) {
+//    //read and replace
+//    std::ifstream file("../assets/tilemaps/" + level + "/" + level + ".lua");
+//    std::vector<std::string> text;
+//    std::string line;
+//    while (getline(file, line)) { // reading every line into an array and if its pre defined one which need to be corrected then correct it
+//        if (line.find("tilesets", 0) != std::string::npos || line.find("layers", 0) != std::string::npos) {
+//            text.push_back(line);
+//            std::getline(file, line);
+//            if (line.find_first_of("0", 0) == std::string::npos) {
+//                int index = line.find_first_of("{");
+//                line.at(index) = '[';
+//                line.append("0] = {");
+//            }
+//        }
+//        text.push_back(line);
+//    }
+//    file.close();
+//
+//    //write
+//    std::fstream out("../assets/tilemaps/" + level + "/" + level + ".lua");
+//    for (std::string lines : text) {
+//        out << lines << std::endl;
+//    }
+//    file.close();
+//}
 
-void swap_subtables(std::string level) {
-    //read and replace
-    std::ifstream file("../assets/tilemaps/" + level + "/" + level + ".lua");
-    std::vector<std::string> text;
-    std::string line;
-    while (getline(file, line)) { // reading every line into an array and if its pre defined one which need to be corrected then correct it
-        if (line.find("tilesets", 0) != std::string::npos || line.find("layers", 0) != std::string::npos) {
-            text.push_back(line);
-            std::getline(file, line);
-            if (line.find_first_of("0", 0) == std::string::npos) {
-                int index = line.find_first_of("{");
-                line.at(index) = '[';
-                line.append("0] = {");
-            }
-        }
-        text.push_back(line);
-    }
-    file.close();
+//void reconstruct_lua_file(std::string level) {
+//    swap_first_line(level);
+//    swap_subtables(level);
+//}
 
-    //write
-    std::fstream out("../assets/tilemaps/" + level + "/" + level + ".lua");
-    for (std::string lines : text) {
-        out << lines << std::endl;
-    }
-    file.close();
-}
-
-void reconstruct_lua_file(std::string level) {
-    swap_first_line(level);
-    swap_subtables(level);
-}
 
 void LoadLevelMap(Levels levelNumber, Map* map)
 {
     std::string level = "level" + std::to_string(levelNumber);
 
     sol::state lua;
+    sol::table levelMap;
     lua.open_libraries(sol::lib::base, sol::lib::os, sol::lib::math);;
-    lua.script_file("../assets/level_data/" + level + "/map/" + level + "_map.lua");
 
-    reconstruct_lua_file(level); // Since the tiled editor places the whole data in a return block which sol cannot accept i had to manualy replace the first line
-
-    sol::table levelMap = lua[level];
+    try {
+        levelMap = lua.script_file("../assets/level_data/" + level + "/map/" + level + "_map.lua");
+    }
+    catch (const sol::error& e) {
+        //TODO
+    }
 
     // Getting the table for the texture id
-    sol::table tilesetdata = levelMap["tilesets"];
+    int tileSize = levelMap["tilewidth"];
 
+    // Tile collider
+    sol::table tilesetdata = levelMap["tilesets"][1];
+    sol::table tileData = tilesetdata["tiles"];
+    int id;
+    sol::table currentTileData, currentTileColliderData;
+    sol::table holder;
+    std::map<int, TileColliderInit> colliderHolder;
+    TileColliderInit pls;
+    //LevelSetup::TileColliderData asd{1};
+    tileData.for_each([&](sol::object const& key, sol::table const& value) {
+        id = value["id"];
+        // Tablaban kerjuk ki a value-t
+        currentTileColliderData = value["objectGroup"]["objects"][1];
+
+
+        pls.x = currentTileColliderData["x"];
+        pls.y = currentTileColliderData["y"];
+        pls.width = currentTileColliderData["width"];
+        pls.height = currentTileColliderData["height"];
+        colliderHolder.emplace(id, pls);
+
+
+        std::cout << id << colliderHolder.at(id).x << colliderHolder.at(id).y << colliderHolder.at(id).width << colliderHolder.at(id).height << std::endl;
+    });
 
     // Getting mapData from it
-    sol::table layersdata = levelMap["layers"];
-    sol::table mapFile = layersdata[0]["data"]; // ez lesz a lay ers-data de nem fstrema hanem egy array lesz
+    sol::table layersdata = levelMap["layers"][1];
+    sol::table mapFile = layersdata["data"]; // ez lesz a lay ers-data de nem fstrema hanem egy array lesz
 
 
-
-    //std::string mapFile;
     // Instantiation a new map component
     map = new Map(
         "terrain-texture-day",
@@ -117,8 +146,7 @@ void LoadLevelMap(Levels levelNumber, Map* map)
         &mapFile,
         static_cast<int>(levelMap["width"]), // width+height
         static_cast<int>(levelMap["height"]),
-        static_cast<int>(tilesetdata[0]["imagewidth"]),
-        static_cast<int>(tilesetdata[0]["imageheight"])
+        &colliderHolder
     );
 }
 
@@ -287,7 +315,7 @@ void LoadLevelEntities(sol::table levelEntities)
 
 // Loading our assets from our lua script file
 // The file gets choosed based upon our current level
-void LevelSetup::LoadLevel(Levels levelNumber, EntityManager* entityManager, AssetManager* assetManager, Map* map, Entity* player)
+void LevelSetup::LoadLevel(Levels levelNumber, EntityManager* entityManager, AssetManager* assetManager, Map* map, Entity** player)
 {
     // We set the current level
     // First we clear the manager if its not empty
@@ -327,7 +355,7 @@ void LevelSetup::LoadLevel(Levels levelNumber, EntityManager* entityManager, Ass
     sol::table levelEntities = levelData["entities"];
     LoadLevelEntities(levelEntities);
 
-    player = entityManager->GetEntityByName("player");
+    *player = entityManager->GetPlayer();
 }
 
 

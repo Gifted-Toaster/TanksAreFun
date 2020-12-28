@@ -9,6 +9,7 @@
 #include <SDL_ttf.h>
 
 class ButtonComponent : public Component {
+
 	// It has a rectangle with drawn border
 	// It has a text in it
 	// It will be marked for highlight target from entitymanager

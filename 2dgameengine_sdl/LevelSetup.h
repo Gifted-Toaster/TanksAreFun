@@ -17,7 +17,7 @@ public:
 		- MapLoading
 		- EntityLoading
 	*/
-	static void LoadLevel(Levels levelNumber, EntityManager* manager, AssetManager* assetManager, Map* map, Entity* player);
+	static void LoadLevel(Levels levelNumber, EntityManager* manager, AssetManager* assetManager, Map* map, Entity** player);
 	// Loading the presets for the level
 	static void LoadPresets(Levels levelNumber , EntityManager* manager);
 };

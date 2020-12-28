@@ -16,8 +16,8 @@ Level1Presets = {
                         x = 0,
                         y = 0
                     },
-                    width = 4,
-                    height = 4,
+                    width = 40,
+                    height = 40,
                     scale = 1,
                     rotation = 0
                 },

@@ -53,12 +53,12 @@ void CollisionManager::HandleCollision(int i, int j, CollisionType collisionType
 
     switch (collisionType) {
         case PLAYER_ENEMY_COLLISION:
-            Game::DamagePlayer(entities_with_collision.at(j));
+            //Game::DamagePlayer(entities_with_collision.at(j));
             std::cout << "PLAYER_ENEMY_COLLISION\n";
             break;
         case PLAYER_PROJECTILE_COLLISION:
             // lose health
-			Game::DamagePlayer(entities_with_collision.at(j));
+			//Game::DamagePlayer(entities_with_collision.at(j));
             std::cout << "PLAYER_PROJECTILE_COLLISION\n";
             break;
         case PLAYER_LEVEL_COMPLETE_COLLISION:
@@ -67,6 +67,7 @@ void CollisionManager::HandleCollision(int i, int j, CollisionType collisionType
 			Game::ProcessNextLevel();
             break;
         case PLAYER_VEGETATION_COLLISION:
+			std::cout << "TERRAIN BLOCK";
             break;
         case ENEMY_PROJECTILE_COLLISION:
             // Enemy lose health
@@ -83,7 +84,7 @@ void CollisionManager::HandleCollision(int i, int j, CollisionType collisionType
 
 CollisionType CollisionManager::GetCollisionType(std::string name1, std::string name2)
 {
-	if (!name1.compare("PLAYER")|| !name2.compare("PLAYER")) {
+	if (!name1.compare("PLAYER") || !name2.compare("PLAYER")) {
 		if (!name1.compare("ENEMY") || !name2.compare("ENEMY")) {
 			return PLAYER_ENEMY_COLLISION;
 		}
@@ -92,6 +93,9 @@ CollisionType CollisionManager::GetCollisionType(std::string name1, std::string 
 		}
 		if (!name1.compare("LEVEL_COMPLETE") || !name2.compare("LEVEL_COMPLETE")) {
 			return PLAYER_LEVEL_COMPLETE_COLLISION;
+		}
+		if (!name1.compare("VEGETATION") || !name2.compare("VEGETATION")) {
+			return PLAYER_VEGETATION_COLLISION;
 		}
 	}
 
