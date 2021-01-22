@@ -37,7 +37,6 @@ void EntityManager::Update(float deltaTime) {
 	for (int layerNumber = 0; layerNumber < NUM_LAYERS; layerNumber++) {
 		for (int j = 0; j < entities[layerNumber].size() ; j++) {
 			entities[layerNumber].at(j)->Update(deltaTime);
-
 			// After this update cycle if the currently entity becomes inactive then we replace it in another array to reduce update time
 			if (!entities[layerNumber].at(j)->IsActive()) 
 			{
@@ -74,6 +73,7 @@ Entity& EntityManager::AddEntity(std::string entityName, LayerType layer) {
 	}
 	// Places the instance on the corresponding entry
 	entities[static_cast<int>(layer)].emplace_back(entity);
+	std::cout << entity << " ...\n";
 	return *entity;
 }
 

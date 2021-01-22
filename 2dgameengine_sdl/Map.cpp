@@ -44,7 +44,7 @@ void Map::LoadMap(std::string filePath, int mapSizeX, int mapSizeY) {
 	mapFile.close();
 }
 
-void Map::LoadMap(sol::table* fileData, int width, int height, std::map<int, TileColliderInit>* colliderHolder)
+void Map::LoadMap(sol::table* fileData, int width, int height, std::map<int, TileColliderInit> colliderHolder)
 {
 	//  Loading everything into this table
 	int width_index = 0 , height_index = 0, sourceRectY, sourceRectX;
@@ -76,7 +76,7 @@ void Map::LoadMap(sol::table* fileData, int width, int height, std::map<int, Til
 		// We have our tileSet indexed between 0 to x (depends on the file) , if a tile has a collider this map has an element on that entry
 		// Our map file consist this tileSet index elements , if our current map tiles index number (current_value) has an element in the map that means it has a collider so we call the corresponding constructor
 		try {
-			AddTileWithCollider(sourceRectX, sourceRectY, width_index * (scale * tileSize), height_index * (scale * tileSize), colliderHolder->at(current_value - 1) );
+			AddTileWithCollider(sourceRectX, sourceRectY, width_index * (scale * tileSize), height_index * (scale * tileSize), colliderHolder.at(current_value - 1) );
 			
 		}
 		catch (const std::out_of_range& oor) {

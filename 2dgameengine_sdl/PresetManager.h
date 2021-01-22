@@ -22,7 +22,7 @@ public:
 	// Return the container size
 	int presetCount();
 	// Create an active entity from a preset
-	Entity& LoadPreset(EntityManager* manager, std::string name, int posX, int posY, Direction faceOfDirection);
+	Entity& LoadPreset(EntityManager* manager, std::string name, Entity* real_owner, Direction faceOfDirection);
 	// Adding a preset to the container
 	Preset& AddPreset(std::string entityName, LayerType layer);
 

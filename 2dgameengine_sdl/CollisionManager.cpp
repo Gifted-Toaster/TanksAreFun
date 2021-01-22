@@ -15,7 +15,7 @@ void CollisionManager::CheckCollision()
 	// 2) create collider pairs
 	// 3) decide what happens with them
 
-	// Safe check for empti collision array
+	// Safe check for empty collision array
 	if (entities_with_collision.size() > 0) 
 	{
 		// 1)
@@ -53,12 +53,12 @@ void CollisionManager::HandleCollision(int i, int j, CollisionType collisionType
 
     switch (collisionType) {
         case PLAYER_ENEMY_COLLISION:
-            //Game::DamagePlayer(entities_with_collision.at(j));
+            Game::DamagePlayer(entities_with_collision.at(j));
             std::cout << "PLAYER_ENEMY_COLLISION\n";
             break;
         case PLAYER_PROJECTILE_COLLISION:
             // lose health
-			//Game::DamagePlayer(entities_with_collision.at(j));
+			Game::DamagePlayer(entities_with_collision.at(j));
             std::cout << "PLAYER_PROJECTILE_COLLISION\n";
             break;
         case PLAYER_LEVEL_COMPLETE_COLLISION:
@@ -67,7 +67,7 @@ void CollisionManager::HandleCollision(int i, int j, CollisionType collisionType
 			Game::ProcessNextLevel();
             break;
         case PLAYER_VEGETATION_COLLISION:
-			std::cout << "TERRAIN BLOCK";
+			std::cout << "TERRAIN BLOCK\n";
             break;
         case ENEMY_PROJECTILE_COLLISION:
             // Enemy lose health

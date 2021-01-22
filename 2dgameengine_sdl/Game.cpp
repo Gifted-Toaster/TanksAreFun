@@ -159,6 +159,7 @@ void Game::Update() {
     Collision();
     // after everything delete the inactive entities
     //manager.DestroyInactiveEntities();
+
 }
 
 void Game::PassLogData(float deltaTime) {
@@ -172,6 +173,7 @@ void Game::PassLogData(float deltaTime) {
     logWindow->UpdateLog("log_3", "Collidable entities: ", manager.GetColliderSize());
     logWindow->UpdateLog("log_4", "MousePosX: ", x);
     logWindow->UpdateLog("log_5", "MousePosY: ", y);
+    //logWindow->UpdateLog("log_6", ": ", y);
 }
 
 void Game::Select()
@@ -193,7 +195,7 @@ void Game::Select()
     default:
         break;
     }
-}
+ }
 
 void Game::StepUp()
 {
@@ -208,6 +210,7 @@ void Game::StepDown()
 // 3) Third game loop method
 // Render our assets 
 void Game::Render() {
+
 
     if (manager.HasNoEntities()) {
         return;
@@ -229,6 +232,7 @@ void Game::Render() {
 // Handle camera movement
 void Game::HandleCameraMovement() {
 
+
     if (mainPlayer) {
         // In this case following the main player
         TransformComponent* mainPlayerTransform = mainPlayer->GetComponent<TransformComponent>();
@@ -242,6 +246,9 @@ void Game::HandleCameraMovement() {
         camera.x = camera.x > camera.w ? camera.w : camera.x;
         camera.y = camera.y > camera.h ? camera.h : camera.y;
     }
+    else {
+        // missing player error
+    }
 }
 // Handle different type of collisions
 void Game::Collision() 
@@ -253,8 +260,6 @@ void Game::Collision()
 void Game::ProcessNextLevel() {
     currentLevel = static_cast<Levels>(static_cast<int>(currentLevel) + 1);
     LevelSetup::LoadLevel(currentLevel, &manager, assetManager, map, &mainPlayer);
-    std::cout << mainPlayer;
-    LevelSetup::LoadPresets(currentLevel, &manager);
 }
 
 // Ending the game
@@ -285,6 +290,6 @@ void Game::spawnEntity(std::string name, int posX, int posY , Direction faceOfDi
     //if (temp) {
     //    temp->Reset(manager.presets.GetPresetAt(name),posX,posY,faceOfDirection);
     //}
-    Entity& newEntity(manager.presets.LoadPreset(&manager, name, posX, posY , faceOfDirection));
+    Entity& newEntity(manager.presets.LoadPreset(&manager, name, mainPlayer , faceOfDirection));
     std::cout << "Outside entity name : " << newEntity.name << " at: " << &newEntity << std::endl;
 }

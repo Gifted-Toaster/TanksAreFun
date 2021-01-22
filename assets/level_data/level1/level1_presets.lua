@@ -30,8 +30,8 @@ Level1Presets = {
                 },
                 projectileEmitter = {
                     speed = 75,
-                    range = 500,
-                    shouldLoop = false
+                    range = 100,
+                    shouldLoop = true
 				}
             }
         },

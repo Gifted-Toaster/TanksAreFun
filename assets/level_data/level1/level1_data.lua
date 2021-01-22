@@ -181,7 +181,7 @@ level1 = {
                         y = 405
                     },
                     velocity = {
-                        x = 0,
+                        x = 10,
                         y = 0
                     },
                     width = 32,
@@ -217,7 +217,7 @@ level1 = {
                         y = 535
                     },
                     velocity = {
-                        x = 0,
+                        x = 10,
                         y = 0
                     },
                     width = 32,
@@ -253,7 +253,7 @@ level1 = {
                         y = 390
                     },
                     velocity = {
-                        x = 0,
+                        x = 10,
                         y = 0
                     },
                     width = 32,

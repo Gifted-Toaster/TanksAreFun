@@ -26,7 +26,9 @@ int PresetManager::presetCount()
 	return container.size();
 }
 
-Entity& PresetManager::LoadPreset(EntityManager *manager, std::string name, int posX, int posY, Direction faceOfDirection) {
+// Instead of passing the position upon creation we pass the address of the entity which called the preset
+// for creating a direct link between the two object
+Entity& PresetManager::LoadPreset(EntityManager *manager, std::string name, Entity* real_owner, Direction faceOfDirection) {
 
 	// Creates a new entity based on the preset
 	Entity* entity = new Entity(*manager, *container[name]);
@@ -43,14 +45,14 @@ Entity& PresetManager::LoadPreset(EntityManager *manager, std::string name, int 
 		*/
 		switch (element.first) {
 		case TRANSFORM: {
-			//int X = std::stoi(element.second.at(0));
-			//int Y = std::stoi(element.second.at(1));
+			int X = real_owner->GetComponent<TransformComponent>()->center.x;
+			int Y = real_owner->GetComponent<TransformComponent>()->center.x;
 			int velX = std::stoi(element.second.at(2));
 			int velY = std::stoi(element.second.at(3));
 			int width = std::stoi(element.second.at(4));
 			int height = std::stoi(element.second.at(5));
 			int scale = std::stoi(element.second.at(6));
-			entity->AddComponent<TransformComponent>(posX, posY, velX, velY, width, height, scale);
+			entity->AddComponent<TransformComponent>(X, Y, velX, velY, width, height, scale);
 			break;
 		}
 		case TILE: {
@@ -99,8 +101,8 @@ Entity& PresetManager::LoadPreset(EntityManager *manager, std::string name, int 
 		{
 			int speed = std::stoi(element.second.at(0));
 			int range = std::stoi(element.second.at(2));
-			bool loop = element.second.at(3).compare("true") ? true : false;
-			entity->AddComponent<ProjectileEmitterComponent>(speed, faceOfDirection, range, loop);
+			bool loop = element.second.at(3).compare("1") ? false : true;
+			entity->AddComponent<ProjectileEmitterComponent>(speed, faceOfDirection, range, loop , real_owner);
 			break;
 		}
 		default:

@@ -29,13 +29,12 @@ public:
 	
 	void Initialize() override 
 	{
-		// Checking if the entity had a transform component , otherwise the whole collision is not working
-		// We have to expand this for tiles which have no transform component
+		// Checking if the entity had a transform component , otherwise its a tile and has a different collision mechanism
 		if (owner->HasComponent<TransformComponent>()) {
 			transform = owner->GetComponent<TransformComponent>();
 			destinationRectangle = { collider.x ,  collider.y , collider.w , collider.h };
 		}
-		else {
+		else { 
 			destinationRectangle = { collider.x ,  collider.y , collider.w , collider.h };
 			this->isStatic = true;
 		}

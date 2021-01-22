@@ -48,44 +48,25 @@ void LoadLevelAssets(sol::table levelAssets, AssetManager* assetManager)
     }
 }
 
-//void swap_first_line(std::string level) {
-//    std::fstream file("../assets/level_data/" + level + "/map/" + level + "_map.lua");
-//    file << level + " = {\n";
-//    file.close();
-//}
-//
-//void swap_subtables(std::string level) {
-//    //read and replace
-//    std::ifstream file("../assets/tilemaps/" + level + "/" + level + ".lua");
-//    std::vector<std::string> text;
-//    std::string line;
-//    while (getline(file, line)) { // reading every line into an array and if its pre defined one which need to be corrected then correct it
-//        if (line.find("tilesets", 0) != std::string::npos || line.find("layers", 0) != std::string::npos) {
-//            text.push_back(line);
-//            std::getline(file, line);
-//            if (line.find_first_of("0", 0) == std::string::npos) {
-//                int index = line.find_first_of("{");
-//                line.at(index) = '[';
-//                line.append("0] = {");
-//            }
-//        }
-//        text.push_back(line);
-//    }
-//    file.close();
-//
-//    //write
-//    std::fstream out("../assets/tilemaps/" + level + "/" + level + ".lua");
-//    for (std::string lines : text) {
-//        out << lines << std::endl;
-//    }
-//    file.close();
-//}
+std::map<int, TileColliderInit> GetTileCollisionData(sol::table* tileData) {
+    sol::table currentTileColliderData;
+    std::map<int, TileColliderInit> colliderHolder;
 
-//void reconstruct_lua_file(std::string level) {
-//    swap_first_line(level);
-//    swap_subtables(level);
-//}
-
+    // Collecting each collidable tilepieces ID and its rectangle position and dimension
+    tileData->for_each([&](sol::object const& key, sol::table const& value) {
+        // Tablaban kerjuk ki a value-t
+        currentTileColliderData = value["objectGroup"]["objects"][1];
+        colliderHolder.emplace(
+            value["id"],
+            TileColliderInit{
+                currentTileColliderData["x"] ,
+                currentTileColliderData["y"],
+                currentTileColliderData["width"] ,
+                currentTileColliderData["height"] }
+        );
+        });
+    return colliderHolder;
+}
 
 void LoadLevelMap(Levels levelNumber, Map* map)
 {
@@ -102,37 +83,13 @@ void LoadLevelMap(Levels levelNumber, Map* map)
         //TODO
     }
 
-    // Getting the table for the texture id
-    int tileSize = levelMap["tilewidth"];
-
     // Tile collider
     sol::table tilesetdata = levelMap["tilesets"][1];
     sol::table tileData = tilesetdata["tiles"];
-    int id;
-    sol::table currentTileData, currentTileColliderData;
-    sol::table holder;
-    std::map<int, TileColliderInit> colliderHolder;
-    TileColliderInit pls;
-    //LevelSetup::TileColliderData asd{1};
-    tileData.for_each([&](sol::object const& key, sol::table const& value) {
-        id = value["id"];
-        // Tablaban kerjuk ki a value-t
-        currentTileColliderData = value["objectGroup"]["objects"][1];
-
-
-        pls.x = currentTileColliderData["x"];
-        pls.y = currentTileColliderData["y"];
-        pls.width = currentTileColliderData["width"];
-        pls.height = currentTileColliderData["height"];
-        colliderHolder.emplace(id, pls);
-
-
-        std::cout << id << colliderHolder.at(id).x << colliderHolder.at(id).y << colliderHolder.at(id).width << colliderHolder.at(id).height << std::endl;
-    });
 
     // Getting mapData from it
     sol::table layersdata = levelMap["layers"][1];
-    sol::table mapFile = layersdata["data"]; // ez lesz a lay ers-data de nem fstrema hanem egy array lesz
+    sol::table mapFile = layersdata["data"]; 
 
 
     // Instantiation a new map component
@@ -146,7 +103,7 @@ void LoadLevelMap(Levels levelNumber, Map* map)
         &mapFile,
         static_cast<int>(levelMap["width"]), // width+height
         static_cast<int>(levelMap["height"]),
-        &colliderHolder
+        GetTileCollisionData(&tileData)
     );
 }
 
@@ -165,7 +122,7 @@ void LoadLevelEntities(sol::table levelEntities)
 
             // Add new entity
             Entity& newEntity(manager.AddEntity(entityName, entityLayerType));
-
+            std::cout << &newEntity << " ...\n";
             // Add Transform Component
             sol::optional<sol::table> existsTransformComponent = entity["components"]["transform"];
             if (existsTransformComponent != sol::nullopt) {
@@ -255,7 +212,8 @@ void LoadLevelEntities(sol::table levelEntities)
                     projectileSpeed,
                     projectileAngle,
                     projectileRange,
-                    projectileShouldLoop
+                    projectileShouldLoop,
+                    &newEntity
                     );
                 projectile.AddComponent<ColliderComponent>(
                     "PROJECTILE",
@@ -302,21 +260,17 @@ void LoadLevelEntities(sol::table levelEntities)
                 newEntity.AddComponent<ButtonComponent>(posX, posY, w, h, text, WHITE_COLOR, fontType, type);
                 manager.buttons.AddButton(&newEntity);
             }
-
-            // ----- This is kinda bad in here but will do the trick
-            if (newEntity.HasComponent<ColliderComponent>()) {
-                manager.collision.AddElement(&newEntity);
-            }
-
         }
         entityIndex++;
     }
+    
 }
 
 // Loading our assets from our lua script file
 // The file gets choosed based upon our current level
 void LevelSetup::LoadLevel(Levels levelNumber, EntityManager* entityManager, AssetManager* assetManager, Map* map, Entity** player)
 {
+
     // We set the current level
     // First we clear the manager if its not empty
     if (!entityManager->HasNoEntities()) {
@@ -339,22 +293,23 @@ void LevelSetup::LoadLevel(Levels levelNumber, EntityManager* entityManager, Ass
     }
 
 
-    // We will load and get the data from this table
+    // Our main table -> level"levelNumber"
     sol::table levelData = lua[levelName];
 
-    // a) Passing its assets data to this variable
+    // a) Getting the asset table and load it
     sol::table levelAssets = levelData["assets"];
     LoadLevelAssets(levelAssets, assetManager);
 
-    // b) Passing its map data to this variable 
+    // b) Opening and loading the map file and the presets , the first one loads the tile collision aswell
     if (levelNumber != 0) {
         LoadLevelMap(levelNumber, map);
+        LoadPresets(levelNumber, entityManager);
     }
 
-    // c) Passing its entity data to this variable
+    // c) Getting the entitiy table and load it
     sol::table levelEntities = levelData["entities"];
     LoadLevelEntities(levelEntities);
-
+     
     *player = entityManager->GetPlayer();
 }
 
@@ -369,7 +324,8 @@ void LevelSetup::LoadPresets(Levels levelNumber, EntityManager* manager) {
 
 
     //  Loading everything into this table
-    sol::table presetData = lua["Level1Presets"];
+    levelName = "Level" + std::to_string(levelNumber) + "Presets";
+    sol::table presetData = lua[levelName];
     // a) Passing its assets data to this variable
     sol::table presetEntities = presetData["entities"];
 
@@ -455,7 +411,8 @@ void LevelSetup::LoadPresets(Levels levelNumber, EntityManager* manager) {
                 newPreset.AddComponent(type, entity["components"]["projectileEmitter"]["speed"]);
                 newPreset.AddComponent(type, entity["components"]["projectileEmitter"]["angle"]);
                 newPreset.AddComponent(type, entity["components"]["projectileEmitter"]["range"]);
-                newPreset.AddComponent(type, entity["components"]["projectileEmitter"]["shouldLoop"]);
+                bool asd = entity["components"]["projectileEmitter"]["shouldLoop"]; // valami itt a bool stringbe olvasasaval elszarodik
+                newPreset.AddComponent(type, std::to_string(asd));
             }
 
             // Add a Health Component
@@ -477,4 +434,5 @@ void LevelSetup::LoadPresets(Levels levelNumber, EntityManager* manager) {
         }
         entityIndex++;
     }
+    std::cout << "Presets has been loaded at " << levelNumber << ". \n";
 }
