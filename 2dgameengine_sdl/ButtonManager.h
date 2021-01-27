@@ -18,6 +18,7 @@ public:
 	// Adding the entity to this list if when its get a buttoncomponent
 	void AddButton(Entity* ent);
 
+	Entity* highlighted_button;
 	unsigned int highlighted_index;
 
 	// Highlight actions

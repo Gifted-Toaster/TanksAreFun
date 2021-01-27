@@ -83,7 +83,7 @@ public:
 
 				// We have to refresh the direction aswell
 				setFace(projectile_owner->GetComponent<TransformComponent>()->faceOfDirection);
-				transform->velocity = glm::vec2(glm::cos(angleRad) * speed, glm::sin(angleRad) * speed);
+				transform->velocity = glm::vec2(glm::cos(angleRad) * speed, glm::sin(angleRad) * speed); // This one needed after dir change
 			}
 			else {
 				owner->SetInactive();

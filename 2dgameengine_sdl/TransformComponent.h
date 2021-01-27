@@ -15,9 +15,9 @@ public:
 	Direction faceOfDirection; 
 	int width;
 	int height;
-	int scale;
+	float scale;
 
-	TransformComponent(int posX, int posY, int velX, int velY, int w, int h, int s) {
+	TransformComponent(float posX, float posY, float velX, float velY, float w, float h, float s) {
 		position = glm::vec2(posX, posY);
 		velocity = glm::vec2(velX, velY);
 		width = w;
@@ -28,7 +28,7 @@ public:
 		scale = s;
 	}
 
-	TransformComponent(int posX, int posY, int velX, int velY, int w, int h, int s, Direction face) {
+	TransformComponent(float posX, float posY, float velX, float velY, float w, float h, float s, Direction face) {
 		position = glm::vec2(posX, posY);
 		velocity = glm::vec2(velX, velY);
 		width = w;
@@ -70,7 +70,6 @@ public:
 		}
 		return false;
 	}
-
 	
 };
 

@@ -127,22 +127,6 @@ level0 = {
                     fixed = true
                 }
             }
-        },
-
-        [5] = {
-            name = "controller",
-            layer = 0,
-            components = {
-                input = {
-                    keyboard = {
-                        up = "w",
-                        left = "",
-                        down = "s",
-                        right = "",
-                        shoot = "space"
-                    }
-                }
-            }
         }
     }
 }

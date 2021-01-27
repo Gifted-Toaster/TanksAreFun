@@ -1,5 +1,5 @@
 #pragma once
 
 static struct TileColliderInit {
-	int x, y, width, height;
+	float x, y, width, height;
 };

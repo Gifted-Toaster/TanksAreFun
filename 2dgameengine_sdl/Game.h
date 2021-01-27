@@ -11,9 +11,12 @@
 #include "./LogWindow.h"
 #include "./LogData.h"
 #include "./LevelSetup.h"
+#include "./Keyboard.h"
+#include "./Mouse.h"
 
 class AssetManager;
 class LogWindow;
+class Player;
 
 static bool isRunning;
 
@@ -39,13 +42,19 @@ It also manages the buttons at the main menu
 class Game {
 private:  
     SDL_Window* mainWindow;
+
 public:
     static SDL_Renderer* renderer;
     static AssetManager* assetManager;
     static SDL_Event event;
     static SDL_Rect camera;
     static LogWindow* logWindow;
-    SDL_Cursor* cursor;
+
+    static Player* mainPlayer;
+    static Mouse* mouse;
+    static Keyboard* keyboard;
+
+    static void MoveCamera(Direction dir);
 
     Game();
     ~Game();
@@ -58,7 +67,6 @@ public:
     void Initialize(int width, int height, bool devConsole);
     void loadMainWindow();
     void LoadLogWindow(bool devConsole);
-    void LoadCursor();
 
 
     // UPDATE EVENTS
@@ -76,7 +84,6 @@ public:
 
     // RUNTIME EVENTS
     static void spawnEntity(std::string type , int posX , int posY , Direction faceOfDirection);
-    static void DamagePlayer(Entity* thatEntity);
     static void ProcessNextLevel();
     static void ProcessGameOver();
     

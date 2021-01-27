@@ -14,7 +14,7 @@ private:
 	// Sdl components
 	SDL_Texture* texture;
 	SDL_Rect sourceRectangle;
-	SDL_Rect destinationRectangle;
+	SDL_FRect destinationRectangle;
 
 	// Animation properties
 	std::map<std::string, Animation> animations;

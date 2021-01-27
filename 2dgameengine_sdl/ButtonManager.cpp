@@ -48,12 +48,12 @@ void ButtonManager::HighLightLast()
 		}
 
 		buttons.at(highlighted_index)->GetComponent<ButtonComponent>()->highlight = true;
-
 	}
 
 }
 
 // Select the highlighted button
+// TODO:  Save its address instead of its index number
 ButtonType ButtonManager::SelectButton()
 {
 	return buttons.at(highlighted_index)->GetComponent<ButtonComponent>()->type;

@@ -10,12 +10,12 @@ class ColliderComponent : public Component {
 public:
 
 	std::string colliderTag;
-	SDL_Rect collider;
-	SDL_Rect destinationRectangle;
+	SDL_FRect collider;
+	SDL_FRect destinationRectangle;
 	TransformComponent* transform;
 	bool isStatic;
 
-	ColliderComponent(std::string colliderTag, int x, int y, int width, int height) 
+	ColliderComponent(std::string colliderTag, float x, float y, float width, float height) 
 	{
 		this->colliderTag = colliderTag;
 		this->collider = { x , y , width , height }; // new type with these parameters
@@ -53,7 +53,7 @@ public:
 	}
 
 	void Render() override {
-		SDL_RenderDrawRect(Game::renderer, &destinationRectangle);
+		SDL_RenderDrawRectF(Game::renderer, &destinationRectangle);
 	}
 
 };

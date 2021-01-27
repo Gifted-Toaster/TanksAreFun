@@ -12,11 +12,11 @@ class TileComponent : public Component {
 public:
 	SDL_Texture* texture;
 	SDL_Rect sourceRectangle;
-	SDL_Rect destinationRectangle;
+	SDL_FRect destinationRectangle;
 	glm::vec2 position;
 	std::string assetTextureId;
 
-	TileComponent(int sourceRectX, int sourceRectY, int x , int y, int tileSize , int tileScale , std::string assetTextureId) {
+	TileComponent(int sourceRectX, int sourceRectY, float x , float y, float tileSize , float tileScale , std::string assetTextureId) {
 		this->assetTextureId = assetTextureId;
 		texture = Game::assetManager->GetTexture(assetTextureId);
 		sourceRectangle.x = sourceRectX;

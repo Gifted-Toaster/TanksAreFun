@@ -19,6 +19,7 @@ public:
 	bool HasNoAssets();
 	~AssetManager();
 	void ClearData();
+	void DeleteData();
 
 // Storage for textures
 private:

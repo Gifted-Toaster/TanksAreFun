@@ -15,13 +15,14 @@ class EntityManager;
 class Entity
 {
 private:
-
 	EntityManager& manager;	
 	bool isActive; // a boolean for its activity , if false , its get deleted with the main game loops itteration
 	std::vector<Component*> components;  // Storing every instance of an added component
 	std::map<const type_info*, Component*> componentTypeMap;
 
 public:
+	static unsigned int number_of_entities;
+
 	//Game* game;
 	// Entitys name
 	std::string name;

@@ -4,7 +4,20 @@
 
 #include <iostream>
 
+// PROPER VECTOR CLEAR
+void EntityManager::DeleteData() // Free the memory on the heap
+{
+	for (int layerNumber = 0; layerNumber < NUM_LAYERS; layerNumber++) {
+		if (entities[layerNumber].size() != 0) {
+			for (auto& entity : entities[layerNumber]) {
+				delete entity;
+			}
+			entities[layerNumber].clear();
+		}
+	}
+}
 
+// DONT USE THIS
 // Iterate through each layer , if there is an element in that layer then free its entities from memory than clear the vector
 void EntityManager::ClearData() 
 {

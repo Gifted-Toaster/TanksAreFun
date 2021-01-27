@@ -5,7 +5,7 @@
 
 class Collision {
 public:
-	static bool CheckRectangleCollision(const SDL_Rect& rectangleA, const SDL_Rect& rectangleB);
+	static bool CheckRectangleCollision(const SDL_FRect& rectangleA, const SDL_FRect& rectangleB);
 };
 
 #endif

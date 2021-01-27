@@ -45,13 +45,13 @@ Entity& PresetManager::LoadPreset(EntityManager *manager, std::string name, Enti
 		*/
 		switch (element.first) {
 		case TRANSFORM: {
-			int X = real_owner->GetComponent<TransformComponent>()->center.x;
-			int Y = real_owner->GetComponent<TransformComponent>()->center.x;
-			int velX = std::stoi(element.second.at(2));
-			int velY = std::stoi(element.second.at(3));
-			int width = std::stoi(element.second.at(4));
-			int height = std::stoi(element.second.at(5));
-			int scale = std::stoi(element.second.at(6));
+			float X = real_owner->GetComponent<TransformComponent>()->center.x;
+			float Y = real_owner->GetComponent<TransformComponent>()->center.y;
+			float velX = std::stoi(element.second.at(2));
+			float velY = std::stoi(element.second.at(3));
+			float width = std::stoi(element.second.at(4));
+			float height = std::stoi(element.second.at(5));
+			float scale = std::stoi(element.second.at(6));
 			entity->AddComponent<TransformComponent>(X, Y, velX, velY, width, height, scale);
 			break;
 		}
@@ -90,10 +90,10 @@ Entity& PresetManager::LoadPreset(EntityManager *manager, std::string name, Enti
 		case COLLIDER:
 		{
 			std::string colliderTag = element.second.at(0);
-			int x = std::stoi(element.second.at(1));
-			int y = std::stoi(element.second.at(2));
-			int width = std::stoi(element.second.at(3));
-			int height = std::stoi(element.second.at(4));
+			float x = std::stoi(element.second.at(1));
+			float y = std::stoi(element.second.at(2));
+			float width = std::stoi(element.second.at(3));
+			float height = std::stoi(element.second.at(4));
 			entity->AddComponent<ColliderComponent>(colliderTag, x, y, width, height);
 			break;
 		}

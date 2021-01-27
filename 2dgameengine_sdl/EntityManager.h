@@ -51,6 +51,7 @@ public:
 	void AddEntity(Entity* preset);
 
 	// Operation methods
+	void DeleteData();
 	void ClearData();
 	bool HasNoEntities() const;
 	void DestroyInactiveEntities();

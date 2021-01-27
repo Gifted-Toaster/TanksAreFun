@@ -7,6 +7,7 @@
 class KeyboardControlComponent : public Component {
 public:
 	// Keys we wanna use in game
+	Entity* main_player;
 	std::string upKey;
 	std::string downKey;
 	std::string rightKey;
@@ -34,8 +35,8 @@ public:
 	}
 
 	void Initialize() override {
-		transform = owner->GetComponent<TransformComponent>();
-		sprite = owner->GetComponent<SpriteComponent>();
+		//transform = owner->GetComponent<TransformComponent>();
+		//sprite = owner->GetComponent<SpriteComponent>();
 	}
 
 	void Update(float deltaTime) override {
@@ -43,56 +44,7 @@ public:
 		// It's in the game.cpp
 		// If happens then decides which action is going to be called based on the comparison of the definitions above
 		if (!owner->name.compare("player")) {
-			if (Game::event.type == SDL_KEYDOWN) {
-				std::string keyCode = std::to_string(Game::event.key.keysym.sym);
-				// Can't be a switch statement since it need int or enum
-				if (keyCode.compare(upKey) == 0) {
-					transform->velocity.y = -50;
-					transform->velocity.x = 0;
-					transform->faceOfDirection = UP;
-					sprite->Play("UpAnimation");
-				}
-				if (keyCode.compare(rightKey) == 0) {
-					transform->velocity.y = 0;
-					transform->velocity.x = 50;
-					transform->faceOfDirection = RIGHT;
-					sprite->Play("RightAnimation");
-				}
-				if (keyCode.compare(leftKey) == 0) {
-					transform->velocity.y = 0;
-					transform->velocity.x = -50;
-					transform->faceOfDirection = LEFT;
-					sprite->Play("LeftAnimation");
-				}
-				if (keyCode.compare(downKey) == 0) {
-					transform->velocity.y = 50;
-					transform->velocity.x = 0;
-					transform->faceOfDirection = DOWN;
-					sprite->Play("DownAnimation");
-				}
-				if (keyCode.compare(actionKey) == 0) {
-					Game::spawnEntity("projectile", transform->center.x, transform->center.y, transform->faceOfDirection);
-				}
-			}
-			if (Game::event.type == SDL_KEYUP) {
-				std::string keyCode = std::to_string(Game::event.key.keysym.sym);
-
-				if (keyCode.compare(upKey) == 0) {
-					transform->velocity.y = 0;
-				}
-				if (keyCode.compare(rightKey) == 0) {
-					transform->velocity.x = 0;
-				}
-				if (keyCode.compare(leftKey) == 0) {
-					transform->velocity.x = 0;
-				}
-				if (keyCode.compare(downKey) == 0) {
-					transform->velocity.y = 0;
-				}
-				if (keyCode.compare(actionKey) == 0) {
-					//...
-				}
-			}
+			
 		}
 
 		if (!owner->name.compare("controller")) {
@@ -114,7 +66,6 @@ public:
 				}
 			}
 		}
-		
 	}
 };
 #endif // !KEYBOARDCONTROLCOMPONENT_H

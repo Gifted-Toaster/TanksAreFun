@@ -53,12 +53,12 @@ void CollisionManager::HandleCollision(int i, int j, CollisionType collisionType
 
     switch (collisionType) {
         case PLAYER_ENEMY_COLLISION:
-            Game::DamagePlayer(entities_with_collision.at(j));
+            //Game::DamagePlayer(entities_with_collision.at(j));
             std::cout << "PLAYER_ENEMY_COLLISION\n";
             break;
         case PLAYER_PROJECTILE_COLLISION:
             // lose health
-			Game::DamagePlayer(entities_with_collision.at(j));
+			//Game::DamagePlayer(entities_with_collision.at(j));
             std::cout << "PLAYER_PROJECTILE_COLLISION\n";
             break;
         case PLAYER_LEVEL_COMPLETE_COLLISION:

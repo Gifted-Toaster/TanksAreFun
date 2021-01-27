@@ -8,16 +8,28 @@
 #include "./Map.h";
 #include "./glm/glm.hpp"
 #include "./AssetManager.h"
+#include "./Player.h"
 #include "./TransformComponent.h"
 #include "./HealthComponent.h"
+#include "./EventHandler.h"
+
 
 EntityManager manager;
 Map* map;
-Entity* mainPlayer = NULL;
 Levels currentLevel;
 AssetManager* Game::assetManager = new AssetManager(&manager);
 SDL_Renderer* Game::renderer;
+
+Mouse* Game::mouse = new Mouse();
+Keyboard* Game::keyboard = new Keyboard();
+
+Player* Game::mainPlayer;
+
 SDL_Event Game::event;
+
+//Mouse Game::cursor = new Mouse();
+//Keyboard Game::keyboard = new Keyboard();
+
 SDL_Rect Game::camera = { 0 ,0 ,WINDOW_WIDTH ,WINDOW_HEIGHT }; // Follows the player
 
 // Log Window
@@ -30,12 +42,16 @@ Game::~Game() {}
 bool Game::IsRunning() const {
     return isRunning;
 }
-// Closing SDL window when the game is over
+// Clearing data and closing SDL window when the game is over
 void Game::Destroy() {
+    manager.DeleteData();
+    assetManager->DeleteData();
+
     // Closing logwindow only if it was opened
     if (logWindow) {
         logWindow->Destroy();
-    }   
+    }
+
     // Destruct the renderer and window
     SDL_DestroyRenderer(renderer);
     SDL_DestroyWindow(mainWindow);
@@ -75,11 +91,6 @@ void Game::LoadLogWindow(bool devConsole)
 
 }
 
-void Game::LoadCursor()
-{
-    cursor = SDL_CreateSystemCursor(SDL_SYSTEM_CURSOR_HAND);
-    SDL_SetCursor(cursor);
-}
 
 // Initilaize our SDL window and loading our first level
 void Game::Initialize(int width, int height , bool devConsole) {
@@ -98,30 +109,42 @@ void Game::Initialize(int width, int height , bool devConsole) {
 
     LoadLogWindow(devConsole);
 
-    LoadCursor();
+    mainPlayer = Player::LoadPlayer();
 
-    LevelSetup::LoadLevel(MAIN_MENU, &manager, assetManager, map, &mainPlayer);  
+    mouse->Initialize(MENU);
+    keyboard->Initialize(MENU);
+
+    LevelSetup::LoadLevel(MAIN_MENU, &manager, assetManager, map);  
 
     isRunning = true;
     return;
 }
 
+
 // 1) First game loop method
 // Handle user input
 void Game::ProcessInput() {
-    SDL_PollEvent(&event);
-    switch (event.type) {
-        case SDL_QUIT: {
-            isRunning = false;
-            break;
-        }
-        case SDL_KEYDOWN: {
-            if (event.key.keysym.sym == SDLK_ESCAPE) {
-                isRunning = false;
+
+    mouse->Update();
+    keyboard->Update();
+
+    // 0 is false 1 is true
+    if (EventHandler::isThereUserInput(&Game::event)) { // this function gives back 0 if there is no user action in que , otherwise 1
+        switch (Game::event.type) {
+            case SDL_MOUSEBUTTONDOWN: {
+                EventHandler::HandleUserInput_Mouse(Game::event, mouse->state);
+                break;
             }
-        }
-        default: {
-            break;
+            case SDL_KEYDOWN: {
+                EventHandler::HandleUserInput_Keyboard(Game::event, keyboard->state);
+                if (Game::event.key.keysym.sym == SDLK_ESCAPE) {
+                    isRunning = false;
+                }
+            }
+            default: {
+                break;
+            }
+
         }
     }
 }
@@ -171,8 +194,8 @@ void Game::PassLogData(float deltaTime) {
     logWindow->UpdateLog("log_1" , "Active entities: ", manager.GetEntityCount());
     logWindow->UpdateLog("log_2", "Inactive entities: ", manager.GetInactiveCount());
     logWindow->UpdateLog("log_3", "Collidable entities: ", manager.GetColliderSize());
-    logWindow->UpdateLog("log_4", "MousePosX: ", x);
-    logWindow->UpdateLog("log_5", "MousePosY: ", y);
+    logWindow->UpdateLog("log_4", "MousePosX: ", mouse->getPosX());
+    logWindow->UpdateLog("log_5", "MousePosY: ", mouse->getPosY());
     //logWindow->UpdateLog("log_6", ": ", y);
 }
 
@@ -228,27 +251,43 @@ void Game::Render() {
     
 }
 
+void Game::MoveCamera(Direction dir) {
+    switch (dir) {
+    case UP:
+        camera.y += 10;
+        break;
+    case DOWN:
+        camera.y -= 10;
+    }
+
+    // Clamping the values of the camera
+    camera.x = camera.x < 0 ? 0 : camera.x;
+    camera.y = camera.y < 0 ? 0 : camera.y;
+    camera.x = camera.x > camera.w ? camera.w : camera.x;
+    camera.y = camera.y > camera.h ? camera.h : camera.y;
+}
+
 // METHODS USED IN OUR UPDATE METHOD
 // Handle camera movement
 void Game::HandleCameraMovement() {
 
 
-    if (mainPlayer) {
-        // In this case following the main player
-        TransformComponent* mainPlayerTransform = mainPlayer->GetComponent<TransformComponent>();
+    //if (mainPlayer) {
+    //    // In this case following the main player
+    //    TransformComponent* mainPlayerTransform = mainPlayer->GetComponent<TransformComponent>();
 
-        camera.x = mainPlayerTransform->position.x - (WINDOW_WIDTH / 2);
-        camera.y = mainPlayerTransform->position.y - (WINDOW_HEIGHT / 2);
+    //    camera.x = mainPlayerTransform->position.x - (WINDOW_WIDTH / 2);
+    //    camera.y = mainPlayerTransform->position.y - (WINDOW_HEIGHT / 2);
 
-        // Clamping the values of the camera
-        camera.x = camera.x < 0 ? 0 : camera.x;
-        camera.y = camera.y < 0 ? 0 : camera.y;
-        camera.x = camera.x > camera.w ? camera.w : camera.x;
-        camera.y = camera.y > camera.h ? camera.h : camera.y;
-    }
-    else {
-        // missing player error
-    }
+    //    // Clamping the values of the camera
+    //    camera.x = camera.x < 0 ? 0 : camera.x;
+    //    camera.y = camera.y < 0 ? 0 : camera.y;
+    //    camera.x = camera.x > camera.w ? camera.w : camera.x;
+    //    camera.y = camera.y > camera.h ? camera.h : camera.y;
+    //}
+    //else {
+    //    // missing player error
+    //}
 }
 // Handle different type of collisions
 void Game::Collision() 
@@ -259,7 +298,9 @@ void Game::Collision()
 // Loading next level
 void Game::ProcessNextLevel() {
     currentLevel = static_cast<Levels>(static_cast<int>(currentLevel) + 1);
-    LevelSetup::LoadLevel(currentLevel, &manager, assetManager, map, &mainPlayer);
+    keyboard->state = IN_GAME;
+    mouse->state = IN_GAME;
+    LevelSetup::LoadLevel(currentLevel, &manager, assetManager, map);
 }
 
 // Ending the game
@@ -268,16 +309,6 @@ void Game::ProcessGameOver() {
     isRunning = false;
 }
 
-
-void Game::DamagePlayer(Entity* thatEntity) {
-    // lose health  
-    mainPlayer->GetComponent<HealthComponent>()->setHealth(-1);
-    if (mainPlayer->GetComponent<HealthComponent>()->getHealth() == 0) {
-        ProcessGameOver();
-    }
-    // Enemy destroy
-    thatEntity->SetInactive();
-}
 
 void Game::spawnEntity(std::string name, int posX, int posY , Direction faceOfDirection)
 {
@@ -290,6 +321,6 @@ void Game::spawnEntity(std::string name, int posX, int posY , Direction faceOfDi
     //if (temp) {
     //    temp->Reset(manager.presets.GetPresetAt(name),posX,posY,faceOfDirection);
     //}
-    Entity& newEntity(manager.presets.LoadPreset(&manager, name, mainPlayer , faceOfDirection));
-    std::cout << "Outside entity name : " << newEntity.name << " at: " << &newEntity << std::endl;
+    //Entity& newEntity(manager.presets.LoadPreset(&manager, name, mainPlayer , faceOfDirection));
+    //std::cout << "Outside entity name : " << newEntity.name << " at: " << &newEntity << std::endl;
 }

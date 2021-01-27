@@ -96,13 +96,13 @@ void LoadLevelMap(Levels levelNumber, Map* map)
     map = new Map(
         "terrain-texture-day",
         2,
-        static_cast<int>(levelMap["tilewidth"]) // tilewidht+height
+        static_cast<float>(levelMap["tilewidth"]) // tilewidht+height
     );
     // Initializing this map
     map->LoadMap(
         &mapFile,
-        static_cast<int>(levelMap["width"]), // width+height
-        static_cast<int>(levelMap["height"]),
+        static_cast<float>(levelMap["width"]), // width+height
+        static_cast<float>(levelMap["height"]),
         GetTileCollisionData(&tileData)
     );
 }
@@ -127,13 +127,13 @@ void LoadLevelEntities(sol::table levelEntities)
             sol::optional<sol::table> existsTransformComponent = entity["components"]["transform"];
             if (existsTransformComponent != sol::nullopt) {
                 newEntity.AddComponent<TransformComponent>(
-                    static_cast<int>(entity["components"]["transform"]["position"]["x"]),
-                    static_cast<int>(entity["components"]["transform"]["position"]["y"]),
-                    static_cast<int>(entity["components"]["transform"]["velocity"]["x"]),
-                    static_cast<int>(entity["components"]["transform"]["velocity"]["y"]),
-                    static_cast<int>(entity["components"]["transform"]["width"]),
-                    static_cast<int>(entity["components"]["transform"]["height"]),
-                    static_cast<int>(entity["components"]["transform"]["scale"])
+                    static_cast<float>(entity["components"]["transform"]["position"]["x"]),
+                    static_cast<float>(entity["components"]["transform"]["position"]["y"]),
+                    static_cast<float>(entity["components"]["transform"]["velocity"]["x"]),
+                    static_cast<float>(entity["components"]["transform"]["velocity"]["y"]),
+                    static_cast<float>(entity["components"]["transform"]["width"]),
+                    static_cast<float>(entity["components"]["transform"]["height"]),
+                    static_cast<float>(entity["components"]["transform"]["scale"])
                     );
             }
 
@@ -145,8 +145,8 @@ void LoadLevelEntities(sol::table levelEntities)
                 if (isAnimated) {
                     newEntity.AddComponent<SpriteComponent>(
                         textureId,
-                        static_cast<int>(entity["components"]["sprite"]["frameCount"]),
-                        static_cast<int>(entity["components"]["sprite"]["animationSpeed"]),
+                        static_cast<float>(entity["components"]["sprite"]["frameCount"]),
+                        static_cast<float>(entity["components"]["sprite"]["animationSpeed"]),
                         static_cast<bool>(entity["components"]["sprite"]["hasDirections"]),
                         static_cast<bool>(entity["components"]["sprite"]["fixed"])
                         );
@@ -156,19 +156,26 @@ void LoadLevelEntities(sol::table levelEntities)
                 }
             }
 
-            // Add input control component
-            sol::optional<sol::table> existsInputComponent = entity["components"]["input"];
-            if (existsInputComponent != sol::nullopt) {
-                sol::optional<sol::table> existsKeyboardInputComponent = entity["components"]["input"]["keyboard"];
-                if (existsKeyboardInputComponent != sol::nullopt) {
-                    std::string upKey = entity["components"]["input"]["keyboard"]["up"];
-                    std::string rightKey = entity["components"]["input"]["keyboard"]["right"];
-                    std::string downKey = entity["components"]["input"]["keyboard"]["down"];
-                    std::string leftKey = entity["components"]["input"]["keyboard"]["left"];
-                    std::string shootKey = entity["components"]["input"]["keyboard"]["shoot"];
-                    newEntity.AddComponent<KeyboardControlComponent>(upKey, rightKey, downKey, leftKey, shootKey);
-                }
-            }
+            // Scrap this whole thing and hardcode the player since its no reason to generalize a single object
+            //// Add input control component
+            //sol::optional<sol::table> existsInputComponent = entity["components"]["controller"];
+            //if (existsInputComponent != sol::nullopt) {
+            //    sol::optional<sol::table> existsKeyboardInputComponent = entity["components"]["controller"]["keyboard"];
+            //    sol::optional<sol::table> existsMouseInputComponent = entity["components"]["controller"]["mouse"];
+            //    if (existsKeyboardInputComponent != sol::nullopt) {
+            //        std::string upKey = entity["components"]["controller"]["keyboard"]["up"];
+            //        std::string rightKey = entity["components"]["controller"]["keyboard"]["right"];
+            //        std::string downKey = entity["components"]["controller"]["keyboard"]["down"];
+            //        std::string leftKey = entity["components"]["controller"]["keyboard"]["left"];
+            //        std::string shootKey = entity["components"]["controller"]["keyboard"]["shoot"];
+            //        newEntity.AddComponent<KeyboardControlComponent>(upKey, rightKey, downKey, leftKey, shootKey);
+            //    }
+            //    if (existsMouseInputComponent != sol::nullopt) {
+            //        std::string left_click = entity["components"]["controller"]["mouse"]["left_click"];
+            //        std::string right_click = entity["components"]["controller"]["mouse"]["right_click"];
+            //        newEntity.AddComponent<KeyboardControlComponent>(left_click,right_click);
+            //    }
+            //}
 
             // Add collider component
             sol::optional<sol::table> existsColliderComponent = entity["components"]["collider"];
@@ -176,25 +183,25 @@ void LoadLevelEntities(sol::table levelEntities)
                 std::string colliderTag = entity["components"]["collider"]["tag"];
                 newEntity.AddComponent<ColliderComponent>(
                     colliderTag,
-                    static_cast<int>(entity["components"]["transform"]["position"]["x"]),
-                    static_cast<int>(entity["components"]["transform"]["position"]["y"]),
-                    static_cast<int>(entity["components"]["transform"]["width"]),
-                    static_cast<int>(entity["components"]["transform"]["height"])
+                    static_cast<float>(entity["components"]["transform"]["position"]["x"]),
+                    static_cast<float>(entity["components"]["transform"]["position"]["y"]),
+                    static_cast<float>(entity["components"]["transform"]["width"]),
+                    static_cast<float>(entity["components"]["transform"]["height"])
                     );
             }
 
             // Add projectile emitter component
             sol::optional<sol::table> existsProjectileEmitterComponent = entity["components"]["projectileEmitter"];
             if (existsProjectileEmitterComponent != sol::nullopt) {
-                int parentEntityXPos = entity["components"]["transform"]["position"]["x"];
-                int parentEntityYPos = entity["components"]["transform"]["position"]["y"];
-                int parentEntityWidth = entity["components"]["transform"]["width"];
-                int parentEntityHeight = entity["components"]["transform"]["height"];
-                int projectileWidth = entity["components"]["projectileEmitter"]["width"];
-                int projectileHeight = entity["components"]["projectileEmitter"]["height"];
-                int projectileSpeed = entity["components"]["projectileEmitter"]["speed"];
-                int projectileRange = entity["components"]["projectileEmitter"]["range"];
-                int projectileAngle = entity["components"]["projectileEmitter"]["angle"];
+                float parentEntityXPos = entity["components"]["transform"]["position"]["x"];
+                float parentEntityYPos = entity["components"]["transform"]["position"]["y"];
+                float parentEntityWidth = entity["components"]["transform"]["width"];
+                float parentEntityHeight = entity["components"]["transform"]["height"];
+                float projectileWidth = entity["components"]["projectileEmitter"]["width"];
+                float projectileHeight = entity["components"]["projectileEmitter"]["height"];
+                float projectileSpeed = entity["components"]["projectileEmitter"]["speed"];
+                float projectileRange = entity["components"]["projectileEmitter"]["range"];
+                float projectileAngle = entity["components"]["projectileEmitter"]["angle"];
                 bool projectileShouldLoop = entity["components"]["projectileEmitter"]["shouldLoop"];
                 std::string textureAssetId = entity["components"]["projectileEmitter"]["textureAssetId"];
                 Entity& projectile(manager.AddEntity("projectile", PROJECTILE_LAYER));
@@ -268,16 +275,15 @@ void LoadLevelEntities(sol::table levelEntities)
 
 // Loading our assets from our lua script file
 // The file gets choosed based upon our current level
-void LevelSetup::LoadLevel(Levels levelNumber, EntityManager* entityManager, AssetManager* assetManager, Map* map, Entity** player)
+void LevelSetup::LoadLevel(Levels levelNumber, EntityManager* entityManager, AssetManager* assetManager, Map* map)
 {
-
     // We set the current level
     // First we clear the manager if its not empty
     if (!entityManager->HasNoEntities()) {
-        entityManager->ClearData();
+        entityManager->DeleteData();
     }
     if (!assetManager->HasNoAssets()) {
-        assetManager->ClearData();
+        assetManager->DeleteData();
     }
    
     sol::state lua;
@@ -291,7 +297,6 @@ void LevelSetup::LoadLevel(Levels levelNumber, EntityManager* entityManager, Ass
     else {
         lua.script_file("../assets/level_data/" + levelName + "/" + levelName + "_data.lua");
     }
-
 
     // Our main table -> level"levelNumber"
     sol::table levelData = lua[levelName];
@@ -309,8 +314,8 @@ void LevelSetup::LoadLevel(Levels levelNumber, EntityManager* entityManager, Ass
     // c) Getting the entitiy table and load it
     sol::table levelEntities = levelData["entities"];
     LoadLevelEntities(levelEntities);
-     
-    *player = entityManager->GetPlayer();
+
+
 }
 
 
