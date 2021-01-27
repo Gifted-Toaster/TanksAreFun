@@ -6,10 +6,13 @@
 ## Progress:
 - Reading from Tiled editor exports (2020.12.21)
 - Terrain Collision base (2020.12.28)
-
+- Mouse and keyboard controll (2021.01.27)
 
 ## TODO:
-- Mouse
-- Unit controll with mouse
+- Unit controll
 - Enemy reactions ( Basic AI )
-- Constructor param data types
+- Creating static libraries
+- Pathfinding
+- Custom ingame hotkeys
+- Basic UI
+- Building creation with from the UI with cursor
