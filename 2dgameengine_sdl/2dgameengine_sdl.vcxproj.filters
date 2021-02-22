@@ -67,153 +67,150 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="EntityManager.cpp">
-      <Filter>Managers\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="AssetManager.cpp">
-      <Filter>Managers\Asset</Filter>
-    </ClCompile>
-    <ClCompile Include="TextureManager.cpp">
-      <Filter>Managers\Texture</Filter>
-    </ClCompile>
-    <ClCompile Include="Entity.cpp">
-      <Filter>Base\BaseObject\Entity</Filter>
-    </ClCompile>
-    <ClCompile Include="Map.cpp">
-      <Filter>Base\BaseObject\Map</Filter>
-    </ClCompile>
-    <ClCompile Include="FontManager.cpp">
-      <Filter>Managers\Font</Filter>
-    </ClCompile>
-    <ClCompile Include="Collision.cpp">
+    <ClCompile Include="engine\Collision\Collision.cpp">
       <Filter>Base\Collision</Filter>
     </ClCompile>
-    <ClCompile Include="LogWindow.cpp">
-      <Filter>GameObject\Log</Filter>
-    </ClCompile>
-    <ClCompile Include="ButtonManager.cpp">
-      <Filter>Managers\Entity\Buttons</Filter>
-    </ClCompile>
-    <ClCompile Include="PresetManager.cpp">
-      <Filter>Managers\Entity\Presets</Filter>
-    </ClCompile>
-    <ClCompile Include="CollisionManager.cpp">
-      <Filter>Managers\Entity\Collision</Filter>
-    </ClCompile>
-    <ClCompile Include="Source.cpp">
+    <ClCompile Include="engine\Controller\Keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="LevelSetup.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
-    <ClCompile Include="ComponentInit.h">
+    <ClCompile Include="engine\Entity\Component\ComponentInit.h">
       <Filter>Base\ComponentTypes</Filter>
     </ClCompile>
-    <ClCompile Include="Game.cpp">
+    <ClCompile Include="engine\Entity\Entity.cpp">
+      <Filter>Base\BaseObject\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\Entity\Map.cpp">
+      <Filter>Base\BaseObject\Map</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\Managers\AssetManager.cpp">
+      <Filter>Managers\Asset</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\Managers\ButtonManager.cpp">
+      <Filter>Managers\Entity\Buttons</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\Managers\CollisionManager.cpp">
+      <Filter>Managers\Entity\Collision</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\Managers\EntityManager.cpp">
+      <Filter>Managers\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\Managers\FontManager.cpp">
+      <Filter>Managers\Font</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\Managers\PresetManager.cpp">
+      <Filter>Managers\Entity\Presets</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\Managers\TextureManager.cpp">
+      <Filter>Managers\Texture</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\misc\LevelSetup.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\misc\LogWindow.cpp">
+      <Filter>GameObject\Log</Filter>
+    </ClCompile>
+    <ClCompile Include="engine\misc\Player.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
+    <ClCompile Include="engine\Game.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Player.cpp">
+    <ClCompile Include="engine\Source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="EntityManager.h">
-      <Filter>Managers\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="AssetManager.h">
-      <Filter>Managers\Asset</Filter>
-    </ClInclude>
-    <ClInclude Include="TextureManager.h">
-      <Filter>Managers\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="Entity.h">
-      <Filter>Base\BaseObject\Entity</Filter>
-    </ClInclude>
-    <ClInclude Include="Map.h">
-      <Filter>Base\BaseObject\Map</Filter>
-    </ClInclude>
-    <ClInclude Include="FontManager.h">
-      <Filter>Managers\Font</Filter>
-    </ClInclude>
-    <ClInclude Include="Collision.h">
+    <ClInclude Include="engine\Collision\Collision.h">
       <Filter>Base\Collision</Filter>
     </ClInclude>
-    <ClInclude Include="Animation.h">
-      <Filter>Managers\Texture</Filter>
-    </ClInclude>
-    <ClInclude Include="TransformComponent.h">
-      <Filter>Base\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="ColliderComponent.h">
-      <Filter>Base\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="HealthComponent.h">
-      <Filter>Base\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="KeyboardControlComponent.h">
-      <Filter>Base\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="ProjectileEmitterComponent.h">
-      <Filter>Base\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="SpriteComponent.h">
-      <Filter>Base\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="TextLabelComponent.h">
-      <Filter>Base\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="TileComponent.h">
-      <Filter>Base\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="Preset.h">
-      <Filter>Base\BaseObject\Entity\Preset</Filter>
-    </ClInclude>
-    <ClInclude Include="LogData.h">
-      <Filter>GameObject\Log</Filter>
-    </ClInclude>
-    <ClInclude Include="LogWindow.h">
-      <Filter>GameObject\Log</Filter>
-    </ClInclude>
-    <ClInclude Include="ButtonComponent.h">
-      <Filter>Base\ComponentTypes</Filter>
-    </ClInclude>
-    <ClInclude Include="ButtonManager.h">
-      <Filter>Managers\Entity\Buttons</Filter>
-    </ClInclude>
-    <ClInclude Include="PresetManager.h">
-      <Filter>Managers\Entity\Presets</Filter>
-    </ClInclude>
-    <ClInclude Include="Constans.h">
-      <Filter>Base\Constans</Filter>
-    </ClInclude>
-    <ClInclude Include="CollisionManager.h">
-      <Filter>Managers\Entity\Collision</Filter>
-    </ClInclude>
-    <ClInclude Include="Component.h">
-      <Filter>Base\ComponentTypes\Base</Filter>
-    </ClInclude>
-    <ClInclude Include="LevelSetup.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Game.h">
-      <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="Controller.h">
+    <ClInclude Include="engine\Controller\Controller.h">
       <Filter>Base\Controller</Filter>
     </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>Base\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="Mouse.h">
-      <Filter>Base\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="EventHandler.h">
+    <ClInclude Include="engine\Controller\EventHandler.h">
       <Filter>Source Files</Filter>
     </ClInclude>
-    <ClInclude Include="Player.h" />
+    <ClInclude Include="engine\Controller\Keyboard.h">
+      <Filter>Base\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Controller\Mouse.h">
+      <Filter>Base\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Component\ButtonComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Component\ColliderComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Component\Component.h">
+      <Filter>Base\ComponentTypes\Base</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Component\HealthComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Component\ProjectileEmitterComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Component\SpriteComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Component\TextLabelComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Component\TileComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Component\TransformComponent.h">
+      <Filter>Base\ComponentTypes</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Preset\Preset.h">
+      <Filter>Base\BaseObject\Entity\Preset</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Entity.h">
+      <Filter>Base\BaseObject\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Entity\Map.h">
+      <Filter>Base\BaseObject\Map</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Managers\AssetManager.h">
+      <Filter>Managers\Asset</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Managers\ButtonManager.h">
+      <Filter>Managers\Entity\Buttons</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Managers\CollisionManager.h">
+      <Filter>Managers\Entity\Collision</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Managers\EntityManager.h">
+      <Filter>Managers\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Managers\FontManager.h">
+      <Filter>Managers\Font</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Managers\PresetManager.h">
+      <Filter>Managers\Entity\Presets</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Managers\TextureManager.h">
+      <Filter>Managers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\misc\Animation.h">
+      <Filter>Managers\Texture</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\misc\LevelSetup.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\misc\LogData.h">
+      <Filter>GameObject\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\misc\LogWindow.h">
+      <Filter>GameObject\Log</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\misc\Player.h" />
+    <ClInclude Include="engine\Constans.h">
+      <Filter>Base\Constans</Filter>
+    </ClInclude>
+    <ClInclude Include="engine\Game.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt">

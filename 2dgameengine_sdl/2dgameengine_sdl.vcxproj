@@ -88,7 +88,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\ToolKit\SDL\Visual C++\include;$(SolutionDir)lib;$(SolutionDir)assets;C:\ToolKit\Lua\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)2dgameengine_sdl\engine;C:\ToolKit\SDL\Visual C++\include;$(SolutionDir)lib;$(SolutionDir)assets;C:\ToolKit\Lua\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -106,7 +106,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\ToolKit\SDL\Visual C++\include;$(SolutionDir)lib;$(SolutionDir)assets;C:\ToolKit\Lua\include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)2dgameengine_sdl\engine;C:\ToolKit\SDL\Visual C++\include;$(SolutionDir)lib;$(SolutionDir)assets;C:\ToolKit\Lua\include</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -126,6 +126,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)2dgameengine_sdl\engine;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -142,6 +143,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
+      <AdditionalIncludeDirectories>$(SolutionDir)2dgameengine_sdl\engine;</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -151,57 +153,56 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="AssetManager.cpp" />
-    <ClCompile Include="ButtonManager.cpp" />
-    <ClCompile Include="Collision.cpp" />
-    <ClCompile Include="CollisionManager.cpp" />
-    <ClCompile Include="ComponentInit.h" />
-    <ClCompile Include="Entity.cpp" />
-    <ClCompile Include="EntityManager.cpp" />
-    <ClCompile Include="FontManager.cpp" />
-    <ClCompile Include="Game.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="LevelSetup.cpp" />
-    <ClCompile Include="LogWindow.cpp" />
-    <ClCompile Include="Map.cpp" />
-    <ClCompile Include="Player.cpp" />
-    <ClCompile Include="PresetManager.cpp" />
-    <ClCompile Include="Source.cpp" />
-    <ClCompile Include="TextureManager.cpp" />
+    <ClCompile Include="engine\Managers\AssetManager.cpp" />
+    <ClCompile Include="engine\Managers\ButtonManager.cpp" />
+    <ClCompile Include="engine\Collision\Collision.cpp" />
+    <ClCompile Include="engine\Managers\CollisionManager.cpp" />
+    <ClCompile Include="engine\Entity\Component\ComponentInit.h" />
+    <ClCompile Include="engine\Entity\Entity.cpp" />
+    <ClCompile Include="engine\Managers\EntityManager.cpp" />
+    <ClCompile Include="engine\Managers\FontManager.cpp" />
+    <ClCompile Include="engine\Game.cpp" />
+    <ClCompile Include="engine\Controller\Keyboard.cpp" />
+    <ClCompile Include="engine\misc\LevelSetup.cpp" />
+    <ClCompile Include="engine\misc\LogWindow.cpp" />
+    <ClCompile Include="engine\Entity\Map.cpp" />
+    <ClCompile Include="engine\misc\Player.cpp" />
+    <ClCompile Include="engine\Managers\PresetManager.cpp" />
+    <ClCompile Include="engine\Source.cpp" />
+    <ClCompile Include="engine\Managers\TextureManager.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Animation.h" />
-    <ClInclude Include="AssetManager.h" />
-    <ClInclude Include="ButtonManager.h" />
-    <ClInclude Include="Collision.h" />
-    <ClInclude Include="CollisionManager.h" />
-    <ClInclude Include="Component.h" />
-    <ClInclude Include="Constans.h" />
-    <ClInclude Include="Controller.h" />
-    <ClInclude Include="Entity.h" />
-    <ClInclude Include="EntityManager.h" />
-    <ClInclude Include="EventHandler.h" />
-    <ClInclude Include="FontManager.h" />
-    <ClInclude Include="Game.h" />
-    <ClInclude Include="ColliderComponent.h" />
-    <ClInclude Include="ButtonComponent.h" />
-    <ClInclude Include="HealthComponent.h" />
-    <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="LevelSetup.h" />
-    <ClInclude Include="LogData.h" />
-    <ClInclude Include="LogWindow.h" />
-    <ClInclude Include="Mouse.h" />
-    <ClInclude Include="Player.h" />
-    <ClInclude Include="Preset.h" />
-    <ClInclude Include="PresetManager.h" />
-    <ClInclude Include="ProjectileEmitterComponent.h" />
-    <ClInclude Include="TextLabelComponent.h" />
-    <ClInclude Include="Map.h" />
-    <ClInclude Include="KeyboardControlComponent.h" />
-    <ClInclude Include="SpriteComponent.h" />
-    <ClInclude Include="TextureManager.h" />
-    <ClInclude Include="TileComponent.h" />
-    <ClInclude Include="TransformComponent.h" />
+    <ClInclude Include="engine\misc\Animation.h" />
+    <ClInclude Include="engine\Managers\AssetManager.h" />
+    <ClInclude Include="engine\Managers\ButtonManager.h" />
+    <ClInclude Include="engine\Collision\Collision.h" />
+    <ClInclude Include="engine\Managers\CollisionManager.h" />
+    <ClInclude Include="engine\Entity\Component\Component.h" />
+    <ClInclude Include="engine\Constans.h" />
+    <ClInclude Include="engine\Controller\Controller.h" />
+    <ClInclude Include="engine\Entity\Entity.h" />
+    <ClInclude Include="engine\Managers\EntityManager.h" />
+    <ClInclude Include="engine\Controller\EventHandler.h" />
+    <ClInclude Include="engine\Managers\FontManager.h" />
+    <ClInclude Include="engine\Game.h" />
+    <ClInclude Include="engine\Entity\Component\ColliderComponent.h" />
+    <ClInclude Include="engine\Entity\Component\ButtonComponent.h" />
+    <ClInclude Include="engine\Entity\Component\HealthComponent.h" />
+    <ClInclude Include="engine\Controller\Keyboard.h" />
+    <ClInclude Include="engine\misc\LevelSetup.h" />
+    <ClInclude Include="engine\misc\LogData.h" />
+    <ClInclude Include="engine\misc\LogWindow.h" />
+    <ClInclude Include="engine\Controller\Mouse.h" />
+    <ClInclude Include="engine\misc\Player.h" />
+    <ClInclude Include="engine\Entity\Preset\Preset.h" />
+    <ClInclude Include="engine\Managers\PresetManager.h" />
+    <ClInclude Include="engine\Entity\Component\ProjectileEmitterComponent.h" />
+    <ClInclude Include="engine\Entity\Component\TextLabelComponent.h" />
+    <ClInclude Include="engine\Entity\Map.h" />
+    <ClInclude Include="engine\Entity\Component\SpriteComponent.h" />
+    <ClInclude Include="engine\Managers\TextureManager.h" />
+    <ClInclude Include="engine\Entity\Component\TileComponent.h" />
+    <ClInclude Include="engine\Entity\Component\TransformComponent.h" />
   </ItemGroup>
   <ItemGroup>
     <Text Include="readme.txt" />
